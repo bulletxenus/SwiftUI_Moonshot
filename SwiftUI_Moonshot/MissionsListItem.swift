@@ -8,11 +8,32 @@
 import SwiftUI
 
 struct MissionsListItem: View {
+    let mission: Mission
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Image(mission.image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .padding()
+            
+            VStack {
+                Text(mission.displayName)
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                Text(mission.formattedLaunchDate)
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.5))
+            }
+            .padding(.vertical)
+            .frame(maxWidth: .infinity)
+            .background(.lightBackground)
+        }
+        .clipShape(.rect(cornerRadius: 10))
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(.lightBackground)
+        )
     }
-}
-
-#Preview {
-    MissionsListItem()
 }

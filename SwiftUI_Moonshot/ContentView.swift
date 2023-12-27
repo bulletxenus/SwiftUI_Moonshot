@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    enum ContentVisionType {
+        case list
+        case grid
+    }
+    
+    let austronauts: [String: Austronaut] = Bundle.main.decode("astronauts.json")
+    let missions: [Mission] = Bundle.main.decode("missions.json")
+        
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                MissionsGrid(missions: missions, austronauts: austronauts)
+                    .transition(
+                        .slide.combined(with:
+                        .scale.combined(with:
+                        .opacity)))
+            }
+            .navigationTitle("Moonshot")
+            .background(.darkBackground)
+            .preferredColorScheme(.dark)
         }
-        .padding()
     }
 }
 
